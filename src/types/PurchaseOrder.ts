@@ -1,20 +1,20 @@
-import {z} from "zod"
+import { Static, t } from 'elysia'
 
-const Products = z.object({
-    Id: z.number(),
-    Name: z.string(),
-    Quantity: z.number(),
-    Rate: z.number(), 
+export const Product = t.Object({
+    Id: t.String(),
+    Name: t.String(),
+    Quantity: t.Number(),
+    Rate: t.Number(), 
 })
 
-export type Products = z.infer<typeof Products>;
+export type ProductType = Static<typeof Product>;
 
-const PurchaseOrder = z.object({
-    Id: z.number(),
-    Code: z.string(),
-    Products: Products,
-    CreatedAt: z.date(),
-    UpdatedAt: z.date()
+export const PurchaseOrder = t.Object({
+    OrderCode: t.String(),
+    Products: t.Array(Product),
+    CreatedAt: t.Date(),
+    UpdatedAt: t.Date(),
+    Total: t.Number()
 })
 
-export type PurchaseOrder = z.infer<typeof PurchaseOrder>;
+export type PurchaseOrderType = Static<typeof PurchaseOrder>;
